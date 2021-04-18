@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class Slingshot : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D ball;
-    [SerializeField] private List<Transform> remainingBalls = new List<Transform>();
+    [SerializeField] private Ball loadedBall;
+    [SerializeField] private List<Ball> balls;
+    //[SerializeField] private List<Transform> remainingBalls = new List<Transform>();
 
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform centerPoint;
@@ -13,20 +14,23 @@ public class Slingshot : MonoBehaviour
     [SerializeField] private LineRenderer leftLine;
     [SerializeField] private LineRenderer rightLine;
 
+    public delegate void ShotHandler();
+    public event ShotHandler Shot;
+
     private void Start()
     {
-        SetBall(ball.gameObject);
+        //SetBall(loadedBall);
     }
 
     private void Update()
     {
-        if(ball != null)
+        if(loadedBall != null)
         {
             DrawSlingshotLines();
 
             if(Input.GetMouseButton(0))
             {
-                ball.position = (Vector2)centerPoint.position + GetMaxSlingshotToMouseVector();
+                loadedBall.transform.position = (Vector2)centerPoint.position + GetMaxSlingshotToMouseVector();
             }
 
             if(Input.GetMouseButtonUp(0))
@@ -36,13 +40,30 @@ public class Slingshot : MonoBehaviour
         }
     }
 
-    public void SetBall(GameObject ball)
+    public Ball Reload()
+    {
+        if(balls.Count == 0) return null;
+
+        for(int i = balls.Count - 1; i > 0; i--)
+        {
+            Vector3 newPosition = balls[i - 1].transform.position;
+            newPosition.y = balls[i].transform.position.y;
+            balls[i].transform.position = newPosition;
+        }
+
+        SetBall(balls[0]);
+        balls.RemoveAt(0);
+
+        return loadedBall;
+    }
+
+    private void SetBall(Ball ball)
     {
         if(ball == null)
         {
             leftLine.enabled = false;
             rightLine.enabled = false;
-            this.ball = null;
+            loadedBall = null;
             return;
         }
 
@@ -50,15 +71,17 @@ public class Slingshot : MonoBehaviour
         rightLine.enabled = true;
 
         ball.transform.SetPositionAndRotation(centerPoint.position, Quaternion.identity);
-        this.ball = ball.GetComponent<Rigidbody2D>();
+        loadedBall = ball;
     }
 
     private void ReleaseBall()
     {
-        ball.constraints = RigidbodyConstraints2D.None;
-        ball.AddForce(-GetMaxSlingshotToMouseVector() * hitPower, ForceMode2D.Impulse);
+        var loadedBallRb2D = loadedBall.GetComponent<Rigidbody2D>();
+        loadedBallRb2D.constraints = RigidbodyConstraints2D.None;
+        loadedBallRb2D.AddForce(-GetMaxSlingshotToMouseVector() * hitPower, ForceMode2D.Impulse);
 
         SetBall(null);
+        Shot.Invoke();
     }
 
     private Vector2 GetMaxSlingshotToMouseVector()
@@ -77,7 +100,7 @@ public class Slingshot : MonoBehaviour
 
     private void DrawSlingshotLines()
     {
-        leftLine.SetPosition(1, leftLine.transform.InverseTransformPoint(ball.position));
-        rightLine.SetPosition(1, rightLine.transform.InverseTransformPoint(ball.position));
+        leftLine.SetPosition(1, leftLine.transform.InverseTransformPoint(loadedBall.transform.position));
+        rightLine.SetPosition(1, rightLine.transform.InverseTransformPoint(loadedBall.transform.position));
     }
 }
