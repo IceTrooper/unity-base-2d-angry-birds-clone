@@ -33,6 +33,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7101687825888819591, guid: 535c217711fe9d944be4df205a2d2ca8, type: 3}
+      propertyPath: destructablePowerImpact
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7221185430077448866, guid: 535c217711fe9d944be4df205a2d2ca8, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -79,7 +83,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8642542343863269175, guid: 535c217711fe9d944be4df205a2d2ca8, type: 3}
       propertyPath: m_Name
-      value: Square Obstacle Variant
+      value: Square Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 535c217711fe9d944be4df205a2d2ca8, type: 3}
