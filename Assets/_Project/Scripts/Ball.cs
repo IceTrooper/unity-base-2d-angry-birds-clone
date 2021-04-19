@@ -2,8 +2,10 @@
 
 public class Ball : MonoBehaviour
 {
+    [SerializeField] private float dieDelay = 5f;
+
     public void Die()
     {
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, dieDelay);
     }
 }
