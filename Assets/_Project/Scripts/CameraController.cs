@@ -1,14 +1,20 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Vector3 startPosition;
-    [SerializeField] private Vector3 endPosition;
-    [SerializeField] private float speed = 2f;
+    [System.Serializable]
+    public struct CameraPoint
+    {
+        public Vector3 position;
+        public float zoom;
+    }
+
+    [SerializeField] private CameraPoint startPoint;
+    [SerializeField] private CameraPoint endPoint;
+    [SerializeField] private float speed = 5f;
 
     private Camera mainCamera = null;
-
-    private Vector3 targetPosition;
 
     private void Awake()
     {
@@ -17,29 +23,36 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        MoveStart();
+        float movingDuration = Vector3.Distance(transform.position, startPoint.position) / speed;
+
+        Sequence startSequence = DOTween.Sequence();
+        startSequence
+            .AppendInterval(0.5f)
+            .Append(mainCamera.DOOrthoSize(endPoint.zoom, 1.5f))
+            .Append(transform.DOMove(startPoint.position, movingDuration))
+            .Join(mainCamera.DOOrthoSize(startPoint.zoom, movingDuration));
+        ;
     }
 
-    private void Update()
+    public void FocusLevel()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-    }
+        float focusDuration = Vector3.Distance(transform.position, endPoint.position) / speed;
+        float backDuration = Vector3.Distance(startPoint.position, endPoint.position) / speed;
 
-    public void MoveStart()
-    {
-        targetPosition = startPosition;
-    }
-
-    public void MoveEnd()
-    {
-        targetPosition = endPosition;
+        Sequence focusLevelSequence = DOTween.Sequence();
+        focusLevelSequence
+            .Append(transform.DOMove(endPoint.position, focusDuration))
+            .Join(mainCamera.DOOrthoSize(endPoint.zoom, focusDuration))
+            .AppendInterval(4f)
+            .Append(transform.DOMove(startPoint.position, backDuration))
+            .Join(mainCamera.DOOrthoSize(startPoint.zoom, backDuration));
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(startPosition, 0.5f);
+        Gizmos.DrawWireSphere(startPoint.position, 0.5f);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(endPosition, 0.5f);
+        Gizmos.DrawWireSphere(endPoint.position, 0.5f);
     }
 }

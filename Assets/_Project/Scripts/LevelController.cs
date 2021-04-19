@@ -24,8 +24,9 @@ public class LevelController : MonoBehaviour
 
     private void OnShot()
     {
-        cameraController.MoveEnd();
+        //cameraController.MoveEnd();
+        cameraController.FocusLevel();
         slingshot.Invoke("Reload", 4f);
-        cameraController.Invoke("MoveStart", 4f);
+        //cameraController.Invoke("MoveStart", 4f);
     }
 }

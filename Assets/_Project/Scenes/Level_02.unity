@@ -418,6 +418,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 528cf0c17ed34134cb496cfc8d5b32ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPoint:
+    position: {x: 0, y: 0, z: -10}
+    zoom: 8
+  endPoint:
+    position: {x: 25, y: 0, z: 0}
+    zoom: 8
   startPosition: {x: 0, y: 0, z: -10}
   endPosition: {x: 25, y: 0, z: -10}
   speed: 5
