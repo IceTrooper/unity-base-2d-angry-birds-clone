@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using DG.Tweening;
 
 public class LevelController : MonoBehaviour
 {
+    [SerializeField] private CameraController cameraController;
     [SerializeField] private Slingshot slingshot;
     
-
     //private Animator levelAnimator;
 
     //public static readonly int hashReady = Animator.StringToHash("Ready");
@@ -16,6 +15,7 @@ public class LevelController : MonoBehaviour
     private void Start()
     {
         //levelAnimator = GetComponent<Animator>();
+        //cameraController.mainCamera.DOOrthoSize(8f, 3f);
 
         slingshot.Shot += OnShot;
         slingshot.Reload();
@@ -24,6 +24,8 @@ public class LevelController : MonoBehaviour
 
     private void OnShot()
     {
-        slingshot.Invoke("Reload", 3f);
+        cameraController.MoveEnd();
+        slingshot.Invoke("Reload", 4f);
+        cameraController.Invoke("MoveStart", 4f);
     }
 }

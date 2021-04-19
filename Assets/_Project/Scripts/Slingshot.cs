@@ -80,6 +80,7 @@ public class Slingshot : MonoBehaviour
         loadedBallRb2D.constraints = RigidbodyConstraints2D.None;
         loadedBallRb2D.AddForce(-GetMaxSlingshotToMouseVector() * hitPower, ForceMode2D.Impulse);
 
+        loadedBall.Die();
         SetBall(null);
         Shot.Invoke();
     }
