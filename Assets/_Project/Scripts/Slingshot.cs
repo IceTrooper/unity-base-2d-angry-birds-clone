@@ -67,11 +67,12 @@ public class Slingshot : MonoBehaviour
             return;
         }
 
-        leftLine.enabled = true;
-        rightLine.enabled = true;
-
         ball.transform.SetPositionAndRotation(centerPoint.position, Quaternion.identity);
         loadedBall = ball;
+
+        leftLine.enabled = true;
+        rightLine.enabled = true;
+        DrawSlingshotLines();
     }
 
     private void ReleaseBall(Vector3 direction)
