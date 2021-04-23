@@ -110,7 +110,7 @@ MonoBehaviour:
     RequiredTag: 
     Camera: {fileID: 0}
     Distance: 50
-  deselectWithFingers: 0
+  deselectWithFingers: 1
   onSelectedFinger:
     m_PersistentCalls:
       m_Calls: []

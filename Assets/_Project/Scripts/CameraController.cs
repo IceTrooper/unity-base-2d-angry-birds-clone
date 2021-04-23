@@ -48,6 +48,14 @@ public class CameraController : MonoBehaviour
             .Join(mainCamera.DOOrthoSize(startPoint.zoom, backDuration));
     }
 
+    public void MoveHorizontal(Vector3 delta)
+    {
+        var clampedX = Mathf.Clamp(transform.position.x - delta.x, startPoint.position.x, endPoint.position.x);
+        var newPosition = transform.position;
+        newPosition.x = clampedX;
+        transform.position = newPosition;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
