@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Lean.Touch;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Slingshot : MonoBehaviour
@@ -22,21 +23,20 @@ public class Slingshot : MonoBehaviour
         //SetBall(loadedBall);
     }
 
-    private void Update()
+    public void HandleTouchUpdate(LeanFinger finger)
     {
-        if(loadedBall != null)
+        if(loadedBall == null) return;
+
+        DrawSlingshotLines();
+
+        var fingerWorldDelta = finger.GetLastWorldPosition(0) - finger.GetStartWorldPosition(0);
+        var fingerClampedDelta = Vector2.ClampMagnitude(fingerWorldDelta, maxSlingshotDistance);
+
+        loadedBall.transform.position = (Vector2)centerPoint.position + fingerClampedDelta;
+
+        if(finger.Up)
         {
-            DrawSlingshotLines();
-
-            if(Input.GetMouseButton(0))
-            {
-                loadedBall.transform.position = (Vector2)centerPoint.position + GetMaxSlingshotToMouseVector();
-            }
-
-            if(Input.GetMouseButtonUp(0))
-            {
-                ReleaseBall();
-            }
+            ReleaseBall(-fingerClampedDelta);
         }
     }
 
@@ -74,29 +74,15 @@ public class Slingshot : MonoBehaviour
         loadedBall = ball;
     }
 
-    private void ReleaseBall()
+    private void ReleaseBall(Vector3 direction)
     {
         var loadedBallRb2D = loadedBall.GetComponent<Rigidbody2D>();
         loadedBallRb2D.constraints = RigidbodyConstraints2D.None;
-        loadedBallRb2D.AddForce(-GetMaxSlingshotToMouseVector() * hitPower, ForceMode2D.Impulse);
+        loadedBallRb2D.AddForce(direction * hitPower, ForceMode2D.Impulse);
 
         loadedBall.Die();
         SetBall(null);
         Shot.Invoke();
-    }
-
-    private Vector2 GetMaxSlingshotToMouseVector()
-    {
-        //Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        //Vector2 toMouseVector = mouseWorldPosition - centerPoint.position;
-
-        //if(toMouseVector.magnitude > maxSlingshotDistance)
-        //{
-        //    toMouseVector = toMouseVector.normalized * maxSlingshotDistance;
-        //}
-        //return toMouseVector;
-        Vector2 toMouseVector = mainCamera.ScreenToWorldPoint(Input.mousePosition) - centerPoint.position;
-        return Vector2.ClampMagnitude(toMouseVector, maxSlingshotDistance);
     }
 
     private void DrawSlingshotLines()
