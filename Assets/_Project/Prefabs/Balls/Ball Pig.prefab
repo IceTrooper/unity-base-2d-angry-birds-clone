@@ -25,7 +25,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6314918948799365745, guid: d1727881f8633624d8895ece4b699ebb, type: 3}
       propertyPath: m_Name
-      value: Ball Pig Variant
+      value: Ball Pig
       objectReference: {fileID: 0}
     - target: {fileID: 6314918948799365759, guid: d1727881f8633624d8895ece4b699ebb, type: 3}
       propertyPath: m_RootOrder

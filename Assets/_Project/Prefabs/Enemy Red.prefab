@@ -23,6 +23,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2233773111050673123, guid: 7d0cb1b400b671c468f5c4d0796ec3a7, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 94732a76a5da5a5449e7ab0505893e72, type: 2}
     - target: {fileID: 2341383462822489976, guid: 7d0cb1b400b671c468f5c4d0796ec3a7, type: 3}
       propertyPath: destructablePowerImpact
       value: 4
