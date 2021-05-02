@@ -1,11 +1,15 @@
-﻿using UnityEngine;
-using DG.Tweening;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Slingshot slingshot;
-    
+
+    [SerializeField] private GameObject finishedPanel;
+
+    private List<GameObject> enemies;
     //private Animator levelAnimator;
 
     //public static readonly int hashReady = Animator.StringToHash("Ready");
@@ -20,13 +24,46 @@ public class LevelController : MonoBehaviour
         slingshot.Shot += OnShot;
         slingshot.Reload();
         //levelAnimator.SetTrigger(hashReady);
+
+        enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
     }
 
     private void OnShot()
     {
         //cameraController.MoveEnd();
         cameraController.FocusLevel();
-        slingshot.Invoke("Reload", 4f);
+        StartCoroutine(WaitForResult());
+        //slingshot.Invoke("Reload", 4f);
         //cameraController.Invoke("MoveStart", 4f);
+    }
+
+    private IEnumerator WaitForResult()
+    {
+        yield return new WaitForSeconds(4f);
+
+        if(!CheckAliveEnemies())
+        {
+            // Level cleared
+            finishedPanel.SetActive(true);
+            yield return null;
+        }
+
+        if(slingshot.Reload() == null)
+        {
+            // Game over
+            finishedPanel.SetActive(true);
+        }
+    }
+
+    private bool CheckAliveEnemies()
+    {
+        for(int i = enemies.Count - 1; i >= 0; i--)
+        {
+            if(enemies[i] == null) enemies.RemoveAt(i);
+        }
+
+        if(enemies.Count > 0) return true;
+
+        return false;
     }
 }

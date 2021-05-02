@@ -393,6 +393,11 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 4651627536051562454, guid: 90de069c89cb46c4b8d95aa3b1aa199f, type: 3}
   m_PrefabInstance: {fileID: 4651627536545144745}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &735603446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5069202459719835978, guid: a5b38316b7cd89141a891e4ac0ebd7cc, type: 3}
+  m_PrefabInstance: {fileID: 5069202460714206628}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &767347832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -526,7 +531,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 985739502}
-  - component: {fileID: 985739504}
   - component: {fileID: 985739503}
   m_Layer: 0
   m_Name: Gameplay
@@ -568,25 +572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraController: {fileID: 519420030}
   slingshot: {fileID: 417497331}
---- !u!95 &985739504
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 985739501}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 42fd53ad5274c3e448de5fced167fab4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  finishedPanel: {fileID: 735603446}
 --- !u!1001 &1183398273
 PrefabInstance:
   m_ObjectHideFlags: 0
