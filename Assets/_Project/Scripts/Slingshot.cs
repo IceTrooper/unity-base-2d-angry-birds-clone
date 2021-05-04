@@ -19,7 +19,7 @@ public class Slingshot : MonoBehaviour
     [SerializeField] private float predictionTime = 2f;
     private List<Vector3> trajectoryPoints = new List<Vector3>();
 
-    public delegate void ShotHandler();
+    public delegate void ShotHandler(Ball shotBall);
     public event ShotHandler Shot;
 
     private void Start()
@@ -89,9 +89,9 @@ public class Slingshot : MonoBehaviour
         loadedBallRb2D.constraints = RigidbodyConstraints2D.None;
         loadedBallRb2D.AddForce(hitValue, ForceMode2D.Impulse);
 
-        loadedBall.Die();
+        Shot.Invoke(loadedBall);
+        loadedBall.Shot();
         SetBall(null);
-        Shot.Invoke();
     }
 
     private void DrawSlingshotLines()

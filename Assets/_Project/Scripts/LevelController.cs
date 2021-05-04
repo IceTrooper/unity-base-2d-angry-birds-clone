@@ -16,19 +16,28 @@ public class LevelController : MonoBehaviour
     //public static readonly int hashShot = Animator.StringToHash("Shot");
     //public static readonly int hashFinish = Animator.StringToHash("Finish");
 
+    private void OnEnable()
+    {
+        slingshot.Shot += OnShot;
+    }
+
+    private void OnDisable()
+    {
+        slingshot.Shot -= OnShot;
+    }
+
     private void Start()
     {
         //levelAnimator = GetComponent<Animator>();
         //cameraController.mainCamera.DOOrthoSize(8f, 3f);
 
-        slingshot.Shot += OnShot;
         slingshot.Reload();
         //levelAnimator.SetTrigger(hashReady);
 
         enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
     }
 
-    private void OnShot()
+    private void OnShot(Ball shotBall)
     {
         //cameraController.MoveEnd();
         cameraController.FocusLevel();
