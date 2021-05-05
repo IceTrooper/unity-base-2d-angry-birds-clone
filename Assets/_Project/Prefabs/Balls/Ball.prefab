@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -9126281166617698860}
   - component: {fileID: 126727346367052104}
   - component: {fileID: 5107998508229787631}
+  - component: {fileID: -2359856736853882101}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -226,3 +227,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dieDelay: 5
+  OnActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDie:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2359856736853882101}
+        m_TargetAssemblyTypeName: ParticleSpawner, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 6893381228373268854, guid: 09b4f7967205a214e8e3d2c91e84b47c, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-2359856736853882101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6314918948799365745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d84723c5a25be41afc976bcbf030ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

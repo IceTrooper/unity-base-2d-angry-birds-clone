@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
@@ -9,11 +10,6 @@ public class Ball : MonoBehaviour
 
     private bool isShot;
     private bool hasTouched;
-
-    private void OnDestroy()
-    {
-        OnDie.Invoke();
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -31,11 +27,20 @@ public class Ball : MonoBehaviour
 
     public void Activate()
     {
+        if(hasTouched) return;
+
         OnActivate.Invoke();
     }
 
     public void Die()
     {
-        Destroy(gameObject, dieDelay);
+        StartCoroutine(DieCoroutine());
+    }
+
+    private IEnumerator DieCoroutine()
+    {
+        yield return new WaitForSeconds(dieDelay);
+        OnDie.Invoke();
+        Destroy(gameObject);
     }
 }
