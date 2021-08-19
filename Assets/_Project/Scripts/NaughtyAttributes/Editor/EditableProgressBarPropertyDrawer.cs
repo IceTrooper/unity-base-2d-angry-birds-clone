@@ -13,7 +13,7 @@ namespace NaughtyAttributes.Editor
 			var maxValue = GetMaxValue(property, progressBarAttribute);
 
 			return IsNumber(property) && IsNumber(maxValue)
-				? GetPropertyHeight(property) + EditorGUIUtility.singleLineHeight + 2f
+				? GetPropertyHeight(property) + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing
 				: GetPropertyHeight(property) + GetHelpBoxHeight();
 		}
 
@@ -28,14 +28,16 @@ namespace NaughtyAttributes.Editor
 				return;
 			}
 
+			bool isIntegerType = property.propertyType == SerializedPropertyType.Integer;
+
 			EditableProgressBarAttribute progressBarAttribute = PropertyUtility.GetAttribute<EditableProgressBarAttribute>(property);
-			var value = property.propertyType == SerializedPropertyType.Integer ? property.intValue : property.floatValue;
-			var valueFormatted = property.propertyType == SerializedPropertyType.Integer ? value.ToString() : string.Format("{0:0.00}", value);
+			var value = isIntegerType ? property.intValue : property.floatValue;
 			var maxValue = GetMaxValue(property, progressBarAttribute);
 
 			if(maxValue != null && IsNumber(maxValue))
 			{
-				var propertyName = ObjectNames.NicifyVariableName(property.name);
+				var maxValueFloat = CastToFloat(maxValue);
+
 				var indentLength = NaughtyEditorGUI.GetIndentLength(rect);
 				var sliderRect = new Rect()
 				{
@@ -48,30 +50,33 @@ namespace NaughtyAttributes.Editor
 				EditorGUI.BeginChangeCheck();
 				if(property.propertyType == SerializedPropertyType.Integer)
 				{
-					//value = EditorGUI.IntSlider(sliderRect, propertyName, Mathf.RoundToInt(value), 0, (int)maxValue);
-					if(EditorGUI.EndChangeCheck())
+                    value = EditorGUI.IntSlider(sliderRect, label, Mathf.RoundToInt(value), 0, (int)maxValueFloat);
+                    if(EditorGUI.EndChangeCheck())
 					{
 						property.intValue = Mathf.RoundToInt(value);
 					}
 				}
 				else
                 {
-					//value = EditorGUI.Slider(sliderRect, propertyName, value, 0, (float)maxValue);
-					if(EditorGUI.EndChangeCheck())
+                    value = EditorGUI.Slider(sliderRect, label, value, 0, maxValueFloat);
+                    if(EditorGUI.EndChangeCheck())
 					{
 						property.floatValue = value;
 					}
 				}
 
-				var fillPercentage = value / CastToFloat(maxValue);
-				var barLabel = (!string.IsNullOrEmpty(progressBarAttribute.Name) ? "[" + progressBarAttribute.Name + "] " : "") + valueFormatted + "/" + maxValue;
+				var valueFormatted = isIntegerType ? value.ToString() : value.ToString("F");
+				var maxValueFormatted = maxValue is int ? ((int)maxValueFloat).ToString() : maxValueFloat.ToString("F");
+
+				var fillPercentage = value / maxValueFloat;
+				var barLabel = (!string.IsNullOrEmpty(progressBarAttribute.Name) ? "[" + progressBarAttribute.Name + "] " : "") + valueFormatted + "/" + maxValueFormatted;
 				var barColor = progressBarAttribute.Color.GetColor();
 				var labelColor = Color.white;
 
-				Rect barRect = new Rect()
+				var barRect = new Rect()
 				{
 					x = rect.x + indentLength,
-					y = rect.y + EditorGUIUtility.singleLineHeight + 2f,
+					y = rect.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing,
 					width = rect.width - indentLength,
 					height = EditorGUIUtility.singleLineHeight
 				};
