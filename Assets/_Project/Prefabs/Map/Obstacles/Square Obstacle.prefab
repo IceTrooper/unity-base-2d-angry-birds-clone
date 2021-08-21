@@ -41,6 +41,10 @@ PrefabInstance:
       propertyPath: OnDestruction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 6893381228373268854, guid: d0bc75767c7631a4f94922a83679ab4c, type: 3}
+    - target: {fileID: -4025991009704394193, guid: 535c217711fe9d944be4df205a2d2ca8, type: 3}
+      propertyPath: OnDie.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 6893381228373268854, guid: d0bc75767c7631a4f94922a83679ab4c, type: 3}
     - target: {fileID: 7221185430077448866, guid: 535c217711fe9d944be4df205a2d2ca8, type: 3}
       propertyPath: m_RootOrder
       value: 0

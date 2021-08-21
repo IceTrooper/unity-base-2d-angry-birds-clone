@@ -10,11 +10,6 @@ public class LevelController : MonoBehaviour
     [SerializeField] private GameObject finishedPanel;
 
     private List<GameObject> enemies;
-    //private Animator levelAnimator;
-
-    //public static readonly int hashReady = Animator.StringToHash("Ready");
-    //public static readonly int hashShot = Animator.StringToHash("Shot");
-    //public static readonly int hashFinish = Animator.StringToHash("Finish");
 
     private void OnEnable()
     {
@@ -28,22 +23,15 @@ public class LevelController : MonoBehaviour
 
     private void Start()
     {
-        //levelAnimator = GetComponent<Animator>();
-        //cameraController.mainCamera.DOOrthoSize(8f, 3f);
-
         slingshot.Reload();
-        //levelAnimator.SetTrigger(hashReady);
 
         enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
     }
 
     private void OnShot(Ball shotBall)
     {
-        //cameraController.MoveEnd();
         cameraController.FocusLevel();
         StartCoroutine(WaitForResult());
-        //slingshot.Invoke("Reload", 4f);
-        //cameraController.Invoke("MoveStart", 4f);
     }
 
     private IEnumerator WaitForResult()

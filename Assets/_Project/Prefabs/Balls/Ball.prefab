@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 126727346367052104}
   - component: {fileID: 5107998508229787631}
   - component: {fileID: -2359856736853882101}
+  - component: {fileID: 4483227540232300615}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -230,6 +231,9 @@ MonoBehaviour:
   OnActivate:
     m_PersistentCalls:
       m_Calls: []
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
   OnDie:
     m_PersistentCalls:
       m_Calls:
@@ -245,6 +249,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  scoreable: {fileID: 4483227540232300615}
 --- !u!114 &-2359856736853882101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,3 +262,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d84723c5a25be41afc976bcbf030ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4483227540232300615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6314918948799365745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd59fd61ffa1bdc48a1b6913d35fc994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointsTextPrefab: {fileID: 4817364204034730479, guid: 03efee520527e8a4fbb78f24b613d5c2, type: 3}
+  pointsScored: {fileID: 11400000, guid: ae2a25df037be4b4283a0abdbe76dbcb, type: 2}
