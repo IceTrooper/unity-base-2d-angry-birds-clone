@@ -195,7 +195,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  inside: 0
+  matched: 1
 --- !u!114 &4651627536051562455
 MonoBehaviour:
   m_ObjectHideFlags: 0
