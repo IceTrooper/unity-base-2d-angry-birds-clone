@@ -23,6 +23,8 @@ public class ScoreUI : MonoBehaviour
 
     private void Start()
     {
+        scoreText.text = 0.ToString();
+
         scoreTextTweener = DOTween.To(x => displayedScore = (int)x, displayedScore, score.Value, 2f)
             .SetEase(Ease.OutCubic)
             .SetAutoKill(false)
