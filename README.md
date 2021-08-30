@@ -1,8 +1,9 @@
 # Angry Birds Clone
 
 [![Made with Unity](https://img.shields.io/badge/Made%20with-Unity-57b9d3.svg?style=for-the-badge&logo=unity)](https://unity3d.com)
-
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://img.shields.io/badge/repo%20status-wip-yellow?style=for-the-badge&logo=statuspal)](https://www.repostatus.org/#wip)
+
+https://user-images.githubusercontent.com/51023959/131269446-f474596e-58be-4bf7-a608-36ecf63598cf.mp4
 
 ## About
 
