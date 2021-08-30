@@ -6,7 +6,7 @@
 
 ## About
 
-The premise of the project was to learn about and use popular tools provided by third party developers through the Unity Asset Store or repositories, such as:
+The premise of the project was to use popular tools provided by third party developers through the Unity Asset Store or repositories, such as:
 - [DOTween](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676)
 - [LeanTouch](https://assetstore.unity.com/packages/tools/input-management/lean-touch-30111)
 - [Unity Atoms](https://github.com/unity-atoms/unity-atoms)
@@ -17,7 +17,7 @@ It was decided to create a 2D game with similar mechanics to Angry Birds. The ga
 
 ### PL version
 
-Założeniem projektu było zapoznanie i wykorzystanie popularnych narzędzi, dostarczonych przez zewnętrznych twórców za pośrednictwem Unity Asset Store lub repozytoriów, takich jak:
+Założeniem projektu było wykorzystanie popularnych narzędzi, dostarczonych przez zewnętrznych twórców za pośrednictwem Unity Asset Store lub repozytoriów, takich jak:
 - DOTween
 - LeanTouch
 - Unity Atoms
